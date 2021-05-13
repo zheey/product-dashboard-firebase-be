@@ -3,13 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const firebase = require("firebase");
-
-var indexRouter = require('./routes/index');
-const firebaseConfig = require("./config/config")
 
 var app = express();
-firebase.initializeApp(firebaseConfig);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

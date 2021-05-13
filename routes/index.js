@@ -1,7 +1,7 @@
 "use strict";
 
-const auth = require('../routes/auth')
 const cors = require('cors')
+const { authenticateUser } = require("../controller/authController");
 
 
 module.exports = app => {
@@ -34,6 +34,6 @@ module.exports = app => {
     }
     next();
   });
+  app.use('/', authenticateUser)
 
-  app.use('/auth', auth)
 };
