@@ -1,9 +1,10 @@
 const admin =  require("firebase-admin");
 const serviceAccount = require("../config/serviceAccountKey.json");
+const { firebaseConfig } = require("../config/config");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://construyo-coding-challenge.firebaseio.com"
+  databaseURL: firebaseConfig.databaseURL
 });
 let db = admin.firestore() ;
 
