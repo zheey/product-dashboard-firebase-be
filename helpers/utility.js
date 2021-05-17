@@ -16,11 +16,6 @@ const sendSuccessResponse = async (res, content, message) => {
 };
 
 const handleError = (err, res) => {
-    if (typeof err === 'string') {
-        Sentry.captureMessage(err);
-    } else {
-        Sentry.captureException(err);
-    }
     if (res) {
         const msg = typeof err === 'string' ? err : 'SOMETHING_WENT_WRONG';
         return sendErrorResponse(res, {}, msg);

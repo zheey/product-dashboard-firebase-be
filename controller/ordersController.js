@@ -2,7 +2,10 @@ const {
   sendErrorResponse,
   sendSuccessResponse
 } = require("../helpers/utility");
-const { db } = require("../config/firebase");
+const {
+    createOrderDAO,
+    updateOrderDAO
+  } = require("../dao/ordersDAO");
 
 const createOrder = async (req, res) => {
   try {
@@ -10,15 +13,14 @@ const createOrder = async (req, res) => {
       title: req.body.title,
       bookingDate: req.body.bookingDate,
       customer: req.body.customer,
-      address: req.body.address
+      address: req.body.address,
+      uid: req.body.uid
     };
-    const docRef = await db.collection("orders").add(orderData);
-    let data = {};
-    const doc = await docRef.get();
-    if (doc.exists) {
-      data = doc.data();
+    const response = await createOrderDAO(orderData);
+    if(!response.success) {
+        return sendErrorResponse(res, {}, response, 500);
     }
-    return sendSuccessResponse(res, data, "Order Added Successfully");
+    return sendSuccessResponse(res, response.data, "Order Added Successfully");
   } catch (error) {
     return sendErrorResponse(res, {}, "Unable to create order");
   }
@@ -34,10 +36,11 @@ const updateOrder = async (req, res) => {
     if (req.body.bookingDate) {
       updateData.bookingDate = req.body.bookingDate;
     }
-    const order = db.collection("orders").doc(orderId);
-    let data = {};
-    await order.update(updateData);
-    return sendSuccessResponse(res, data, "Order Updated Successfully");
+    const response = await updateOrderDAO(orderId, updateData);
+    if(!response.success) {
+        return sendErrorResponse(res, {}, response.error, 500);
+    }
+    return sendSuccessResponse(res, response.data, "Order Updated Successfully");
   } catch (error) {
     return sendErrorResponse(res, {}, "Unable to update order");
   }
