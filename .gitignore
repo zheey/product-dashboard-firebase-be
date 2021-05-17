@@ -18,6 +18,8 @@ coverage
 .idea/*
 .idea
 .env
+/config/config.js
+/config/serviceAccountKey.json
 
 .history/*
 yarn.lock
@@ -38,8 +40,6 @@ dist/*
 npm-debug.log
 package-lock.json
 **/.DS_Store
-/config/config
-/config/serviceAccountKey.json
 /node_modules
 node_modules
 
