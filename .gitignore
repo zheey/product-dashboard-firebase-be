@@ -18,7 +18,6 @@ coverage
 .idea/*
 .idea
 .env
-/config/config.js
 /config/serviceAccountKey.json
 
 .history/*
