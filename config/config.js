@@ -6,7 +6,7 @@ const firebaseConfig = {
   storageBucket: "construyo-coding-challenge.appspot.com",
   messagingSenderId: "275103082078",
   appId: "1:275103082078:web:3d55c84dee230264"
-}; 
+};
 
 module.exports = {
   firebaseConfig
