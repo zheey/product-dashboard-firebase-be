@@ -1,20 +1,13 @@
-const admin =  require("firebase-admin");
-const serviceAccount = require("./config/serviceAccountKey.json");
+const { admin } = require("../config/firebase");
 const { sendErrorResponse } = require("../helpers/utility");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://construyo-coding-challenge.firebaseio.com"
-});
-
-
-const authenticateUser = (req, res) => {
-    const token = req.headers.token;
+const authenticateUser = (req, res, next) => {
+    const token = req.header("Authorization").split(" ")[1];
     if (token) {
         admin.auth().verifyIdToken(token)
           .then(() => {
             next()
-          }).catch(() => {
+          }).catch((error) => {
             sendErrorResponse(res, {}, 'Unauthorized', 401);
           });
       } else {

@@ -33,10 +33,13 @@ dist/*
 
 # Dependency directory
 # https://docs.npmjs.com/cli/shrinkwrap#caveats
-node_modules
-/node_modules
 
 # Debug log from npm
 npm-debug.log
 package-lock.json
 **/.DS_Store
+/config/config
+/config/serviceAccountKey.json
+/node_modules
+node_modules
+
